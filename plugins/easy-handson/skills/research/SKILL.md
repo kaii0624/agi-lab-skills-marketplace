@@ -27,11 +27,11 @@ user-invocable: true
 以下の観点で検索する。
 
 - **直近1週間以内**のアップデート・新機能を優先する
-- ソースの優先順位:
+- ソースは **Anthropic 公式のみ** を使う:
   1. Anthropic 公式ブログ（https://www.anthropic.com/news）
   2. Claude Code 公式ドキュメント（https://docs.anthropic.com）
   3. Anthropic 公式 X（@AnthropicAI）
-  4. 各社公式リリースノート・公式ブログ
+- Anthropic 公式以外の情報源（他社ブログ・まとめサイト・個人投稿など）は使わない
 - 「社内で試せる」かどうかを意識して取捨選択する
 - **必ず各情報の出典 URL を記録する**（後でスライドに掲載するため）
 
@@ -100,7 +100,8 @@ marp --pptx "${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.md" \
 
 ### Step 5: ファイルをプレビューで開く
 
-PPTX の生成が完了したら、すぐに開いてプレビューできるようにする。
+PPTX の生成が完了したら、**必ず**以下の Bash コマンドを実行してファイルを開く。
+ユーザーに手動で開かせてはいけない。このステップは絶対にスキップしない。
 
 ```bash
 open "${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.pptx"
@@ -130,8 +131,9 @@ No  発表日        名前                          ソース
 
 - 情報は必ずWebで検索してから返す。知識だけで答えない
 - 直近1週間以内の情報を優先する。古い情報（1ヶ月以上前）は除外する
-- Claude Code / Anthropic の情報は必ず Anthropic 公式（anthropic.com / docs.anthropic.com）をソースにする
-- 各機能に必ずソース URL を付ける。URL が取得できない情報は掲載しない
+- ソースは Anthropic 公式のみ。他社・まとめサイト・個人投稿は使わない
+- 各機能に必ずソース URL を付ける。Anthropic 公式の URL が取得できない情報は掲載しない
+- PPTX 生成後は必ず `open` コマンドを Bash で実行する。ユーザーに開かせない
 - 候補は必ず**5件以内**に絞る。多くても5件
 - 「難しそう」より「触ってみたくなる」視点で書く
 - 結果は必ず PPTX ファイルに書き出す（ターミナル表示だけでは不十分）
