@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGI Lab Skills Marketplace ガイド</title>
+  <style>
+    :root {
+      --bg: #f6f8ff;
+      --panel: #ffffff;
+      --text: #132238;
+      --muted: #5b6b7f;
+      --accent: #006e7f;
+      --accent-soft: #d9f3f7;
+      --line: #d8e0ec;
+      --ok: #1f8b4c;
+      --warn: #a06300;
+      --shadow: 0 10px 30px rgba(6, 36, 79, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 10% 10%, #e3efff 0, transparent 36%),
+        radial-gradient(circle at 88% 0%, #e4f7ff 0, transparent 34%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #062447 0%, #005a71 100%);
+      color: #ecf8ff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+
+    .hero p {
+      margin: 0;
+      opacity: 0.96;
+    }
+
+    .quick-nav {
+      margin: 18px 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .quick-nav a {
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      margin-top: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      border-left: 6px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      background: var(--accent-soft);
+      color: #0b4e58;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .tree {
+      margin: 0;
+      padding: 14px;
+      border-radius: 12px;
+      background: #0d1d34;
+      color: #cbf7f2;
+      font-family: "Menlo", "Consolas", "Monaco", monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fcfdff;
+    }
+
+    code {
+      background: #edf2f9;
+      color: #11304d;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-family: "Menlo", "Consolas", "Monaco", monospace;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.94rem;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+    }
+
+    th {
+      background: #f1f6fd;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .flow span {
+      background: #f3f9ff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-weight: 700;
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 560px) {
+      .hero, section {
+        border-radius: 14px;
+      }
+      .wrap {
+        width: 94vw;
+      }
+      th, td {
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <h1>AGI Lab Skills Marketplace<br />構造理解ガイド</h1>
+      <p>
+        この資料は「このリポジトリが何で、どこを触ると何が変わるのか」を
+        最短で掴むためのガイドです。
+      </p>
+      <div class="chips">
+        <span class="chip">対象: 初見ユーザー</span>
+        <span class="chip">主眼: フォルダ構造の意味</span>
+        <span class="chip">使い方: そのまま改造可能</span>
+      </div>
+    </header>
+
+    <nav class="quick-nav">
+      <a href="#overview">1. 全体像</a>
+      <a href="#tree">2. フォルダ構造</a>
+      <a href="#meanings">3. 各ファイルの意味</a>
+      <a href="#plugins">4. 収録プラグイン</a>
+      <a href="#workflow">5. 変更時の流れ</a>
+    </nav>
+
+    <section id="overview">
+      <h2>1. まず全体像</h2>
+      <div class="flow">
+        <span>Marketplace 定義</span>
+        <span class="arrow">→</span>
+        <span>Plugin 定義</span>
+        <span class="arrow">→</span>
+        <span>Skill 定義</span>
+        <span class="arrow">→</span>
+        <span>Script 実行</span>
+      </div>
+      <p>
+        ざっくり言うと、<code>.claude-plugin/marketplace.json</code> が「棚」、
+        <code>plugins/*/.claude-plugin/plugin.json</code> が「商品ラベル」、
+        <code>skills/*/SKILL.md</code> が「使い方・振る舞い」、
+        <code>scripts/*</code> が「実際に動く処理」です。
+      </p>
+    </section>
+
+    <section id="tree">
+      <h2>2. フォルダ構造と役割</h2>
+      <pre class="tree">.
+├── .claude-plugin/
+│   └── marketplace.json
+├── plugins/
+│   ├── hackathon-starter/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── skills/
+│   │       └── starter-guide/
+│   │           └── SKILL.md
+│   └── terminal-vibes/
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       ├── skills/
+│       │   └── vibes/
+│       │       └── SKILL.md
+│       └── scripts/
+│           ├── cat_art.sh
+│           ├── dad_jokes.sh
+│           ├── donut.py
+│           └── matrix.sh
+└── README.md</pre>
+      <div class="grid">
+        <article class="card">
+          <h3><code>.claude-plugin/</code></h3>
+          <p>リポジトリ全体の marketplace 設定。どの plugin を公開するかを定義します。</p>
+        </article>
+        <article class="card">
+          <h3><code>plugins/</code></h3>
+          <p>プラグイン本体の置き場。1フォルダ = 1プラグインです。</p>
+        </article>
+        <article class="card">
+          <h3><code>skills/</code></h3>
+          <p>エージェントの振る舞い定義。呼び出し条件や出力ルールが入ります。</p>
+        </article>
+        <article class="card">
+          <h3><code>scripts/</code></h3>
+          <p>必要なら実行ファイルを置く層。terminal-vibes はここを呼び出して演出します。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="meanings">
+      <h2>3. 重要ファイルの意味</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ファイル</th>
+            <th>何を決めるか</th>
+            <th>ここを変えると何が変わるか</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.claude-plugin/marketplace.json</code></td>
+            <td>marketplace 名、公開される plugin 一覧</td>
+            <td>インストール時に見えるマーケット情報と配布対象が変わる</td>
+          </tr>
+          <tr>
+            <td><code>plugins/*/.claude-plugin/plugin.json</code></td>
+            <td>plugin 名、説明、version、author</td>
+            <td>plugin 一覧表示の見え方が変わる</td>
+          </tr>
+          <tr>
+            <td><code>plugins/*/skills/*/SKILL.md</code></td>
+            <td>呼び出し条件、振る舞い、出力フォーマット</td>
+            <td>エージェントが実際にどう動くかが変わる</td>
+          </tr>
+          <tr>
+            <td><code>plugins/terminal-vibes/scripts/*</code></td>
+            <td>ASCII 表示などの実行処理</td>
+            <td>画面演出の内容や時間が変わる</td>
+          </tr>
+          <tr>
+            <td><code>README.md</code></td>
+            <td>利用者向け入口、手順、デモ導線</td>
+            <td>初見の理解速度と試されやすさが変わる</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="plugins">
+      <h2>4. 収録プラグインを一言で</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><code>hackathon-starter</code></h3>
+          <p>
+            <span class="ok">提出用の土台</span>。<br />
+            自分のアイデアを「対象ユーザー・入力・出力・自律ポイント」に整理して
+            README とデモまで繋げるためのテンプレートです。
+          </p>
+          <p class="warn">実運用用というより、最初の設計ガイドとして使う想定です。</p>
+        </article>
+        <article class="card">
+          <h3><code>terminal-vibes</code></h3>
+          <p>
+            <span class="ok">遊び用プラグイン</span>。<br />
+            ASCII ネコ、ダジャレ、ドーナツ、Matrix を実行して休憩体験を提供します。
+          </p>
+          <p>
+            <code>cat</code> と <code>joke</code> はその場実行、<code>donut</code> と
+            <code>matrix</code> は別ターミナル案内が基本です。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <h2>5. 何か変更したいときの順番</h2>
+      <ol>
+        <li>まず <code>README.md</code> で目的を明文化する</li>
+        <li><code>skills/*/SKILL.md</code> で入力・出力・ルールを固定する</li>
+        <li>必要なら <code>scripts/*</code> を実装する</li>
+        <li><code>plugin.json</code> の説明と version を更新する</li>
+        <li>最後に <code>marketplace.json</code> の plugin 一覧を確認する</li>
+      </ol>
+      <p>
+        迷ったら「README と SKILL.md だけで使い方が伝わるか」を先に満たすと失敗しにくいです。
+      </p>
+    </section>
+
+    <footer>
+      last updated: 2026-03-07
+    </footer>
+  </main>
+</body>
+</html>

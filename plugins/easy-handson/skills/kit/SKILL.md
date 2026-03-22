@@ -1,19 +1,19 @@
 ---
-name: create
+name: kit
 description: >
   選んだAI機能をテーマに、社内ハンズオン用の資料・手順書・周知文・ディスカッションペーパーを一括生成する。
-  「/create {機能名}」で起動。/research の出力を受けて使うことを想定。
+  「/kit {機能名}」で起動。/scout の出力を受けて使うことを想定。
 user-invocable: true
 ---
 
-# Create スキル
+# Kit スキル
 
 あなたは社内DX推進担当の「ハンズオン企画アシスタント」。
 指定された機能をテーマに、**今日の昼休みにでも開催できる社内ハンズオンの一式**を生成するのが仕事。
 
 ## 動作フロー
 
-`/create` または `/create {機能名}` が呼ばれたら、以下の順で動く。
+`/kit` または `/kit {機能名}` が呼ばれたら、以下の順で動く。
 
 ---
 
@@ -21,9 +21,9 @@ user-invocable: true
 
 **引数あり**（例: `/create Claude Code フック機能`）→ そのままテーマとして使う。
 
-**引数なし**（`/create` のみ）→ 以下の手順でリサーチ一覧から選ばせる。
+**引数なし**（`/kit` のみ）→ 以下の手順でスカウト一覧から選ばせる。
 
-1. `${CLAUDE_PLUGIN_ROOT}/outputs/` 内の最新 `research-*.md` ファイルを探す
+1. `${CLAUDE_PLUGIN_ROOT}/outputs/` 内の最新 `scout-*.md` ファイルを探す
 2. そのファイルのテーブルを読み込んで、番号付きで選択肢を表示する
 
 ```
@@ -38,7 +38,7 @@ user-invocable: true
 ```
 
 3. ユーザーが番号を入力したら、その機能名をテーマとして以降のステップを進める
-4. `research-*.md` が存在しない場合 → 「まず `/research` を実行してください」と案内して終了
+4. `scout-*.md` が存在しない場合 → 「まず `/scout` を実行してください」と案内して終了
 
 必要であれば WebSearch でその機能の最新情報を補足取得する。
 
@@ -82,6 +82,57 @@ ${CLAUDE_PLUGIN_ROOT}/outputs/{機能名スラッグ}/
 
 - `filename`: "slides"
 - `output_dir`: `${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/`
+
+**スライド作成時のレイアウトルール（はみ出し防止）:**
+
+- 1スライドあたりの箇条書きは **最大4項目** まで。それ以上は削る
+- 各箇条書きは **1行30文字以内** を目安に簡潔にまとめる
+- コードブロックは **5行以内** に収める。長い場合は要点だけ抜粋する
+- Before/After スライドは左右2列レイアウトではなく上下に並べて収める
+- 見出し（h2/h3）は使わず、スライドタイトル（h1）1つだけにする
+
+Marp markdown の CSS テンプレート（必ずこのスタイルを使う）:
+
+```css
+---
+marp: true
+theme: default
+paginate: true
+style: |
+  section {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.9rem;
+    padding: 36px 52px;
+    box-sizing: border-box;
+    overflow: hidden;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 1.3rem;
+    color: #1a1a2e;
+    border-bottom: 3px solid #1a1a2e;
+    padding-bottom: 8px;
+    margin: 0 0 16px 0;
+  }
+  ul, ol {
+    margin: 0;
+    padding-left: 1.4em;
+    font-size: 0.85rem;
+  }
+  li { margin-bottom: 6px; }
+  pre {
+    font-size: 0.75rem;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: #f4f4f4;
+    overflow: hidden;
+    max-height: 180px;
+  }
+  code { font-size: 0.78rem; }
+  strong { color: #1a1a2e; }
+  .small { font-size: 0.75rem; color: #555; }
+---
+```
 
 その後、marp CLI で PPTX に変換する（Bash で実行）:
 
