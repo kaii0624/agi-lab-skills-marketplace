@@ -26,27 +26,29 @@ user-invocable: true
 
 以下の観点で検索する。
 
-- **直近1週間以内**のアップデート・新機能を優先する
+- **直近1ヶ月以内**に公開されたものに限定する（それ以前の情報は掲載しない）
 - ソースは **Anthropic 公式のみ** を使う:
   1. Anthropic 公式ブログ（https://www.anthropic.com/news）
   2. Claude Code 公式ドキュメント（https://docs.anthropic.com）
   3. Anthropic 公式 X（@AnthropicAI）
 - Anthropic 公式以外の情報源（他社ブログ・まとめサイト・個人投稿など）は使わない
-- 「社内で試せる」かどうかを意識して取捨選択する
-- **必ず各情報の出典 URL を記録する**（後でスライドに掲載するため）
+- **Claude Code のターミナル版で実際に手を動かして試せる新機能**に絞る
+  - 単なるお知らせ・価格変更・モデルリリースなど「触れないもの」は除外する
+  - ターミナルで試せる操作・コマンド・動作が伴うものだけを選ぶ
+- **必ず各情報の出典 URL を記録する**（完了メッセージに掲載するため）
 
 ### Step 3: ハンズオン適性でスコアリングして上位5件に絞る
 
-以下の基準で各候補をスコアリングし、**上位5件のみ**を選ぶ。
+以下の基準で各候補をスコアリングし、**上位3件のみ**を選ぶ。
 
 | 基準 | 内容 |
 |------|------|
-| 試しやすさ | ブラウザか手元の環境だけで体験できる |
+| 試しやすさ | ターミナルで今すぐ試せる（環境構築不要か最小限） |
 | 伝わりやすさ | 「何が変わったか」が15分で説明できる |
 | 驚きがある | 実際に触ったら「おお」と思ってもらえる |
 | 業務に近い | 通信・社内DX・資料作成・情報収集などに関連する |
 
-5件より少ない場合はあってもよい。6件以上は掲載しない。
+3件より少ない場合はあってもよい。4件以上は掲載しない。
 
 ### Step 4: Marp markdown を作成して PPTX に変換する
 
@@ -57,7 +59,7 @@ ${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.md   ← Marp markdown（中
 ${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.pptx ← 最終出力
 ```
 
-Marp markdown のテンプレート（No は 1〜5、ソースURLを必ず記載）:
+Marp markdown のテンプレート（No は 1〜3、ソース列は不要）:
 
 ```markdown
 ---
@@ -68,26 +70,23 @@ style: |
   section { font-family: 'Helvetica Neue', sans-serif; padding: 40px 60px; }
   h1 { font-size: 1.6rem; color: #1a1a2e; border-bottom: 3px solid #1a1a2e; padding-bottom: 12px; }
   .meta { color: #888; font-size: 0.75rem; margin-bottom: 20px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
   th { background: #1a1a2e; color: #fff; padding: 10px 14px; text-align: left; }
   td { padding: 10px 14px; border-bottom: 1px solid #ddd; vertical-align: top; }
   tr:nth-child(even) td { background: #f5f7ff; }
   .footer { margin-top: 20px; font-size: 0.75rem; color: #555; background: #e8f4fd; padding: 10px 16px; border-radius: 6px; }
-  a { color: #0066cc; font-size: 0.7rem; }
   code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
 ---
 
-# 📋 AI新機能一覧 — ハンズオンネタ候補 TOP5
+# 📋 Claude Code 新機能 — ハンズオンネタ候補 TOP3
 
-<div class="meta">調査対象: {キーワード} ／ 調査日: {YYYY-MM-DD} ／ ソース: Anthropic公式・各社公式</div>
+<div class="meta">調査対象: {キーワード} ／ 調査日: {YYYY-MM-DD} ／ ソース: Anthropic公式</div>
 
-| No | 発表日 | 名前 | 機能概要 | ソース |
-|----|--------|------|---------|--------|
-| 1 | {発表日} | {機能名} | {機能概要 1〜2文} | [{ソース名}]({URL}) |
-| 2 | {発表日} | {機能名} | {機能概要 1〜2文} | [{ソース名}]({URL}) |
-| 3 | {発表日} | {機能名} | {機能概要 1〜2文} | [{ソース名}]({URL}) |
-| 4 | {発表日} | {機能名} | {機能概要 1〜2文} | [{ソース名}]({URL}) |
-| 5 | {発表日} | {機能名} | {機能概要 1〜2文} | [{ソース名}]({URL}) |
+| No | 発表日 | 名前 | 機能概要 |
+|----|--------|------|---------|
+| 1 | {発表日} | {機能名} | {機能概要 1〜2文} |
+| 2 | {発表日} | {機能名} | {機能概要 1〜2文} |
+| 3 | {発表日} | {機能名} | {機能概要 1〜2文} |
 
 <div class="footer">💡 気になった機能があれば <code>/create {機能名}</code> を実行してください</div>
 ```
@@ -116,13 +115,11 @@ open "${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.pptx"
 
 📊 outputs/research-{YYYY-MM-DD}.pptx
 
---- ハンズオン候補 TOP5 ---
-No  発表日        名前                          ソース
+--- Claude Code 手を動かせる新機能 TOP3 ---
+No  発表日        名前                          ソース(Anthropic公式)
 1.  {発表日}      {機能名}                      {URL}
 2.  {発表日}      {機能名}                      {URL}
 3.  {発表日}      {機能名}                      {URL}
-4.  {発表日}      {機能名}                      {URL}
-5.  {発表日}      {機能名}                      {URL}
 
 「これを試したい」と思ったら `/create {機能名}` を実行してください。
 ```
@@ -132,7 +129,11 @@ No  発表日        名前                          ソース
 - 情報は必ずWebで検索してから返す。知識だけで答えない
 - 直近1週間以内の情報を優先する。古い情報（1ヶ月以上前）は除外する
 - ソースは Anthropic 公式のみ。他社・まとめサイト・個人投稿は使わない
-- 各機能に必ずソース URL を付ける。Anthropic 公式の URL が取得できない情報は掲載しない
+- Claude Code ターミナル版で実際に手を動かして試せる新機能のみ掲載。お知らせ・価格変更・モデルリリースは除外
+- 直近1ヶ月以内に公開された情報のみ。それ以前は除外
+- 各機能に必ずソース URL を付ける（完了メッセージに表示）。URL が取得できない情報は掲載しない
+- スライドのテーブルにソース列は不要（完了メッセージのみに記載）
+- 候補は必ず **3件以内** に絞る
 - PPTX 生成後は必ず `open` コマンドを Bash で実行する。ユーザーに開かせない
 - 候補は必ず**5件以内**に絞る。多くても5件
 - 「難しそう」より「触ってみたくなる」視点で書く

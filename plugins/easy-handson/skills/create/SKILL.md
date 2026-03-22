@@ -229,10 +229,12 @@ Teams / Slack 両対応の文面を生成する。
 
 ### Step 7: 成果物をプレビューで開く
 
-すべてのファイルが生成されたら、以下のコマンドで成果物フォルダとスライドを開く。
+すべてのファイルが生成されたら、**必ず**以下の Bash コマンドを順番に実行する。
+ユーザーに手動で開かせてはいけない。このステップは絶対にスキップしない。
 
 ```bash
 open "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/slides.pptx"
+open "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/announce.txt"
 open "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/"
 ```
 
@@ -268,5 +270,5 @@ open "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/"
 - ディスカッションペーパーの業務シーン例は、通信・社内DX・資料作成・情報収集など身近な業務を選ぶ
 - スライドは必ず PPTX に変換する（Marp markdown のままでは不十分）
 - 出力は必ずファイルに書き出す（ターミナルに出力するだけでは不十分）
-- 生成後は必ず `open` コマンドで成果物を開く
+- 生成後は必ず `open` コマンドで slides.pptx・announce.txt・成果物フォルダを開く。ユーザーに開かせない
 - 日本語で返す
