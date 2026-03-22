@@ -6,9 +6,17 @@
   },
   "metadata": {
     "description": "AGIラボの plugin 集と、ハッカソン参加者向け starter template。",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
+    {
+      "name": "easy-handson",
+      "source": "./plugins/easy-handson",
+      "description": "生成AIの最新機能をリサーチして、社内ハンズオン用の資料・手順書・周知文を一括生成するエージェント。",
+      "version": "0.1.0",
+      "category": "productivity",
+      "tags": ["handson", "workshop", "research", "dx", "internal", "slack", "teams"]
+    },
     {
       "name": "hackathon-starter",
       "source": "./plugins/hackathon-starter",

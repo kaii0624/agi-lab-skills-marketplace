@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>AI新機能一覧 2026-03-22</title>
+  <style>
+    body { font-family: 'Helvetica Neue', sans-serif; padding: 40px; background: #f9f9f9; }
+    h1 { font-size: 1.4rem; color: #333; }
+    p.meta { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    th { background: #1a1a2e; color: #fff; padding: 12px 16px; text-align: left; font-size: 0.85rem; }
+    td { padding: 12px 16px; border-bottom: 1px solid #eee; font-size: 0.9rem; vertical-align: top; }
+    tr:hover td { background: #f0f4ff; }
+    td:first-child { text-align: center; color: #888; width: 40px; }
+    td:nth-child(2) { white-space: nowrap; color: #555; width: 100px; }
+    td:nth-child(3) { font-weight: bold; color: #1a1a2e; width: 200px; }
+    .next { margin-top: 24px; padding: 16px; background: #e8f4fd; border-radius: 8px; font-size: 0.9rem; }
+    code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>📋 AI新機能一覧 — ハンズオンネタ候補</h1>
+  <p class="meta">調査対象: Claude Code / Anthropic 最新情報 ／ 調査日: 2026-03-22</p>
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>発表日</th>
+        <th>名前</th>
+        <th>機能概要</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2025-07</td>
+        <td>Claude Code Hooks</td>
+        <td>ファイル保存・コマンド実行などのタイミングで任意のシェルコマンドを自動実行できる仕組み。/hooks コマンドでGUIから設定可能。コードを書かずにワークフローを自動化できる。</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2025-12</td>
+        <td>非同期バックグラウンドエージェント</td>
+        <td>Claude Code がバックグラウンドでタスクを並列実行できる機能。フォアグラウンドで別の作業をしながら、裏側でエージェントに調査・生成をさせられる。開発効率3.8倍の報告あり。</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>2025-12</td>
+        <td>Agent Skills（スキルマーケットプレイス）</td>
+        <td>Claude Code に独自スキルをインストールして機能拡張できる仕組み。2025年12月に仕様がオープン化され、誰でも作って公開できるようになった。社内向けスキルを自分たちで作れる。</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>2025-09</td>
+        <td>Claude Code チェックポイント機能</td>
+        <td>作業をこまめに保存して、問題があれば好きな時点まで巻き戻せる機能。Claude Code 2.0 で追加。大きな変更を安心して試せるようになった。</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>2025-10</td>
+        <td>Claude Code サンドボックス強化</td>
+        <td>gVisor ベースのアイソレーションにより、承認プロンプトが84%削減。セキュリティを保ちながら開発者体験が大幅に改善された。</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="next">
+    💡 気になった機能があれば <code>/create {機能名}</code> を実行してください。スライド・手順書・周知文を一括生成します。
+  </div>
+</body>
+</html>

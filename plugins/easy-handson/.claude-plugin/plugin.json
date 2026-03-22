@@ -1,0 +1,9 @@
+{
+  "name": "easy-handson",
+  "description": "生成AIの最新機能をリサーチして、社内ハンズオンをすぐ開催できる一式を生成するエージェント。",
+  "version": "0.1.0",
+  "author": { "name": "Kai Ito" },
+  "homepage": "",
+  "license": "MIT",
+  "keywords": ["handson", "workshop", "research", "dx", "internal", "slack", "teams"]
+}
