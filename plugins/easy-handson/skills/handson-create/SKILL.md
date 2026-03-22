@@ -1,8 +1,8 @@
 ---
-name: kit
+name: handson-create
 description: >
   選んだAI機能をテーマに、社内ハンズオン用の資料・手順書・周知文・ディスカッションペーパーを一括生成する。
-  「/kit {機能名}」で起動。/scout の出力を受けて使うことを想定。
+  「/handson-create {機能名}」で起動。/handson-research の出力を受けて使うことを想定。
 user-invocable: true
 ---
 
@@ -13,7 +13,7 @@ user-invocable: true
 
 ## 動作フロー
 
-`/kit` または `/kit {機能名}` が呼ばれたら、以下の順で動く。
+`/handson-create` または `/handson-create {機能名}` が呼ばれたら、以下の順で動く。
 
 ---
 
@@ -21,9 +21,9 @@ user-invocable: true
 
 **引数あり**（例: `/create Claude Code フック機能`）→ そのままテーマとして使う。
 
-**引数なし**（`/kit` のみ）→ 以下の手順でスカウト一覧から選ばせる。
+**引数なし**（`/handson-create` のみ）→ 以下の手順でスカウト一覧から選ばせる。
 
-1. `${CLAUDE_PLUGIN_ROOT}/outputs/` 内の最新 `scout-*.md` ファイルを探す
+1. `${CLAUDE_PLUGIN_ROOT}/outputs/` 内の最新 `handson-research-*.md` ファイルを探す
 2. そのファイルのテーブルを読み込んで、番号付きで選択肢を表示する
 
 ```
@@ -38,7 +38,7 @@ user-invocable: true
 ```
 
 3. ユーザーが番号を入力したら、その機能名をテーマとして以降のステップを進める
-4. `scout-*.md` が存在しない場合 → 「まず `/scout` を実行してください」と案内して終了
+4. `handson-research-*.md` が存在しない場合 → 「まず `/handson-research` を実行してください」と案内して終了
 
 必要であれば WebSearch でその機能の最新情報を補足取得する。
 
