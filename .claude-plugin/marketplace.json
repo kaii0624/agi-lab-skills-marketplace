@@ -15,23 +15,15 @@
       "description": "生成AIの最新機能をリサーチして、社内ハンズオン用の資料・手順書・周知文を一括生成するエージェント。",
       "version": "0.1.0",
       "category": "productivity",
-      "tags": ["handson", "workshop", "research", "dx", "internal", "slack", "teams"]
-    },
-    {
-      "name": "hackathon-starter",
-      "source": "./plugins/hackathon-starter",
-      "description": "AGIラボハッカソン参加者向けの starter plugin。fork して、自分の skill に置き換えて公開・提出できます。",
-      "version": "0.1.0",
-      "category": "template",
-      "tags": ["starter", "template", "hackathon", "marketplace"]
-    },
-    {
-      "name": "terminal-vibes",
-      "source": "./plugins/terminal-vibes",
-      "description": "Spinning ASCII donuts, cat art, dad jokes, and Matrix rain. Pure terminal fun, no API keys needed.",
-      "version": "1.1.0",
-      "category": "fun",
-      "tags": ["entertainment", "ascii-art", "terminal", "break-time"]
+      "tags": [
+        "handson",
+        "workshop",
+        "research",
+        "dx",
+        "internal",
+        "slack",
+        "teams"
+      ]
     }
   ]
 }
