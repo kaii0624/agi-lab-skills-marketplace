@@ -58,88 +58,69 @@ ${CLAUDE_PLUGIN_ROOT}/outputs/{機能名スラッグ}/
 
 ### Step 3: スライド資料の生成（PPTX）
 
-`mcp__majin-slide__generate_slide_prompt` を以下のパラメータで呼ぶ。
+Marp 形式の markdown を自分で作成し、marp CLI で PPTX に変換する。
+外部のスライド生成ツールは使わない。
 
-- `topic`: "{機能名} — 社内ハンズオン紹介資料"
-- `audience`: "社内の非エンジニア〜エンジニア混在チーム"
-- `language`: "Japanese"
-- `style`: "casual"
-- `slides_count`: 6
-- `include_code`: true（コードが関係する機能の場合）
+スライド構成（6枚）:
 
-生成されたプロンプトをもとに、スライド内容を以下の構成で作る。
+| スライド | タイトル | 内容 |
+|---------|---------|------|
+| 1 | タイトル | 機能名・今日のゴール・所要時間 |
+| 2 | この機能って何？ | 1〜2文の説明 + キーワード3つ以内 |
+| 3 | 何が変わる？ | Before と After を上下で比較 |
+| 4 | やってみよう | ターミナルコマンド or 操作手順（3ステップ以内） |
+| 5 | 応用例 | 業務での使いどころ（箇条書き3つ以内） |
+| 6 | まとめ | 今日のポイント + 次のアクション |
 
-| スライド | 内容 |
-|---------|------|
-| 1 | タイトル・今日のゴール |
-| 2 | この機能って何？（1分で説明） |
-| 3 | 何が嬉しいの？（Before / After） |
-| 4 | 実際にやってみよう（手順の概要） |
-| 5 | 試してみた結果・応用例 |
-| 6 | まとめ・次のアクション |
+レイアウトルール（はみ出し防止）:
 
-`mcp__majin-slide__create_slide_file` で Marp markdown を保存する。
+- 箇条書きは 1スライドあたり最大4項目
+- 各項目は 30文字以内 に簡潔にまとめる
+- コードブロックは 5行以内（長い場合は要点だけ抜粋）
+- 見出しは h1のみ（h2/h3は使わない）
+- Before/After は左右2列ではなく上下で並べる
 
-- `filename`: "slides"
-- `output_dir`: `${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/`
+必ず使うCSSテンプレート（marpのfrontmatterに含める）:
 
-**スライド作成時のレイアウトルール（はみ出し防止）:**
+  marp: true
+  theme: default
+  paginate: true
+  style: |
+    section {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 0.88rem;
+      padding: 36px 52px;
+      box-sizing: border-box;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 1.3rem;
+      color: #1a1a2e;
+      border-bottom: 3px solid #1a1a2e;
+      padding-bottom: 8px;
+      margin: 0 0 16px 0;
+    }
+    ul, ol { margin: 0; padding-left: 1.4em; font-size: 0.83rem; }
+    li { margin-bottom: 6px; }
+    pre {
+      font-size: 0.73rem;
+      padding: 10px 14px;
+      border-radius: 6px;
+      background: #f4f4f4;
+      overflow: hidden;
+      max-height: 170px;
+    }
+    code { font-size: 0.76rem; background: #eee; padding: 2px 5px; border-radius: 3px; }
+    strong { color: #1a1a2e; }
+    .before { background: #fff3f3; border-left: 4px solid #e74c3c; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px; font-size: 0.8rem; }
+    .after  { background: #f0fff4; border-left: 4px solid #27ae60; padding: 8px 12px; border-radius: 4px; font-size: 0.8rem; }
 
-- 1スライドあたりの箇条書きは **最大4項目** まで。それ以上は削る
-- 各箇条書きは **1行30文字以内** を目安に簡潔にまとめる
-- コードブロックは **5行以内** に収める。長い場合は要点だけ抜粋する
-- Before/After スライドは左右2列レイアウトではなく上下に並べて収める
-- 見出し（h2/h3）は使わず、スライドタイトル（h1）1つだけにする
+スライド区切りは --- を使う。
 
-Marp markdown の CSS テンプレート（必ずこのスタイルを使う）:
+生成した markdown を outputs/{スラッグ}/slides.md に書き出し、marp CLI で PPTX に変換する（Bash で実行）:
 
-```css
----
-marp: true
-theme: default
-paginate: true
-style: |
-  section {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 0.9rem;
-    padding: 36px 52px;
-    box-sizing: border-box;
-    overflow: hidden;
-    line-height: 1.5;
-  }
-  h1 {
-    font-size: 1.3rem;
-    color: #1a1a2e;
-    border-bottom: 3px solid #1a1a2e;
-    padding-bottom: 8px;
-    margin: 0 0 16px 0;
-  }
-  ul, ol {
-    margin: 0;
-    padding-left: 1.4em;
-    font-size: 0.85rem;
-  }
-  li { margin-bottom: 6px; }
-  pre {
-    font-size: 0.75rem;
-    padding: 10px 14px;
-    border-radius: 6px;
-    background: #f4f4f4;
-    overflow: hidden;
-    max-height: 180px;
-  }
-  code { font-size: 0.78rem; }
-  strong { color: #1a1a2e; }
-  .small { font-size: 0.75rem; color: #555; }
----
-```
-
-その後、marp CLI で PPTX に変換する（Bash で実行）:
-
-```bash
-marp --pptx "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/slides.md" \
-     --output "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/slides.pptx"
-```
+  marp --pptx "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/slides.md" --output "${CLAUDE_PLUGIN_ROOT}/outputs/{スラッグ}/slides.pptx"
 
 ---
 
