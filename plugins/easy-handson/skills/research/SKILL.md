@@ -88,14 +88,22 @@ marp --pptx ${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.md \
      --output ${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.pptx
 ```
 
-### Step 5: 完了メッセージを出す
+### Step 5: ファイルをプレビューで開く
 
-ファイル保存後、以下を表示する。
+PPTX の生成が完了したら、すぐに開いてプレビューできるようにする。
+
+```bash
+open "${CLAUDE_PLUGIN_ROOT}/outputs/research-{YYYY-MM-DD}.pptx"
+```
+
+### Step 6: 完了メッセージを出す
+
+ファイル保存・オープン後、以下を表示する。
 
 ```
-✅ リサーチ完了！
+✅ リサーチ完了！ファイルを自動で開きました。
 
-📊 outputs/research-{YYYY-MM-DD}.pptx を開いてください。
+📊 outputs/research-{YYYY-MM-DD}.pptx
 
 --- 候補一覧 ---
 No  発表日        名前
@@ -113,5 +121,6 @@ No  発表日        名前
 - 直近1週間以内の情報を優先する。古い情報（1ヶ月以上前）は除外する
 - 「難しそう」より「触ってみたくなる」視点で書く
 - 結果は必ず PPTX ファイルに書き出す（ターミナル表示だけでは不十分）
+- 生成後は必ず `open` コマンドでファイルを開く
 - フォーマットを崩さない（次のスキルへの引き継ぎに使うため）
 - 日本語で返す
